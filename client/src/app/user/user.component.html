@@ -1,0 +1,11 @@
+<button mat-raised-button [routerLink]="['new']" style="margin-bottom: 30px">
+  <mat-icon>add</mat-icon> Add User
+</button>
+
+<app-mat-custom-table
+  *ngIf="users.length"
+  (action)="onTableAction($event)"
+  [dataset]="$users.isDataChange()"
+  [columns]="columns"
+>
+</app-mat-custom-table>

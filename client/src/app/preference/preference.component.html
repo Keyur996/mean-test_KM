@@ -1,0 +1,10 @@
+<app-preference-add-edit></app-preference-add-edit>
+
+<app-mat-custom-table
+  *ngIf="preferences.length"
+  (action)="onTableAction($event)"
+  [dataset]="$preference.isDataChange()"
+  [columns]="columns"
+  (onPageChanged)="getPreferences($event)"
+>
+</app-mat-custom-table>

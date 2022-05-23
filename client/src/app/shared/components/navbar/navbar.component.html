@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" style="margin-bottom: 0px">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="appSideNav.toggleSideNav()">menu</mat-icon>
+    </button>
+    <mat-icon>people</mat-icon> &nbsp;
+    <span>Users Management</span>
+    <span class="menu-spacer"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<app-sidenav #appSideNav></app-sidenav>

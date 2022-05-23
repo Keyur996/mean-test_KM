@@ -1,0 +1,50 @@
+<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <!-- table dynamic columns -->
+  <ng-container
+    *ngFor="let column of columns"
+    [matColumnDef]="column.columnDef"
+  >
+    <span *ngIf="column.isImage">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>
+        {{ column.header }}
+      </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        <img class="__image-field" [src]="getImageUrl(row, column)" />
+      </mat-cell>
+    </span>
+
+    <span *ngIf="!column.isImage">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>
+        {{ column.header }}
+      </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">{{
+        !column.isObject
+          ? row[column.columnDef]
+          : getValue(row[column.columnDef], column)
+      }}</mat-cell>
+    </span>
+  </ng-container>
+
+  <!-- table action column -->
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+    <mat-cell
+      *matCellDef="let element"
+      action-buttons
+      [value]="element"
+      (buttonAction)="onTableAction($event)"
+    >
+      {{ element.weight }}
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+<!-- table pagination -->
+<mat-paginator
+  [pageSizeOptions]="[10, 20]"
+  [pageIndex]="currentPage"
+  [pageSize]="pageSize"
+  (page)="pageChanged($event)"
+>
+</mat-paginator>
